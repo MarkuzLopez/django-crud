@@ -27,7 +27,7 @@ class User(models.Model):
         validators=[
             RegexValidator(
                 regex=r'^\+?\d{9,15}$',
-                message="el numerop debe tener entre 9 y 15 digitos",                
+                message="el numero debe tener entre 9 y 15 digitos",                
             )
         ],
         verbose_name="Numero de Telefono"
