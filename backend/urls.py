@@ -20,4 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),    
     path('api/v1/', include('myapp.urls')),
+    # step 5 conntected urls with base to folder the same level folder principal
+    # example: backend/myapp/myapp.urls
 ]
