@@ -5,6 +5,17 @@ from .models import Task, User
 from .serializers import TaskSerializer, UserSerializer
 # Create your views here.
 
+#pasar variables  desde la vista, HTLM y logica.
+def home(request):
+    productos = [
+        {"nombre": "Camisa", "precio": 20},
+        {"nombre": "Pantalón", "precio": 35},
+    ]
+    return render(request, "miapp/home.html", {
+        "nombre": "Carlos",
+        "productos": productos
+    })
+
 class TaskListCreateView(generics.ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
