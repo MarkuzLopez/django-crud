@@ -1,20 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from rest_framework import generics
-from .models import Task, User
-from .serializers import TaskSerializer, UserSerializer
-# Create your views here.
+from .models import Task, User, Product
 
-#pasar variables  desde la vista, HTLM y logica.
-def home(request):
-    productos = [
-        {"nombre": "Camisa", "precio": 20},
-        {"nombre": "Pantalón", "precio": 35},
-    ]
-    return render(request, "miapp/home.html", {
-        "nombre": "Carlos",
-        "productos": productos
-    })
+#IMPORT FORMS
+from .forms import ProductForm
+
+from .serializers import TaskSerializer, UserSerializer
+#step 3 for create form with template
+#view of forms, with template DTL.
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # redirige a otra vista después de guardar
+    else:
+        form = ProductForm()
+
+    return render(request, 'products/create_product.html', {'form': form})
+
+def product_list(request):
+    return render(request, 'products/product_list.html')
 
 class TaskListCreateView(generics.ListCreateAPIView):
     queryset = Task.objects.all()

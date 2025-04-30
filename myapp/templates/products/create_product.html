@@ -1,0 +1,18 @@
+<!-- #step 4 for create form with template -->
+ <!-- create template for form in browser -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Producto</title>
+</head>
+<body>
+    <h2>Formulariom de Producto</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> Guardar </button>
+    </form>
+</body>
+</html>

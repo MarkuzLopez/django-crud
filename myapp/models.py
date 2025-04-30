@@ -1,6 +1,12 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinLengthValidator
 
+#step 1 for create form with template
+#create model with template
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    product = models.CharField(max_length=200)
+
 # Create your models here.
 class Task(models.Model):
     title = models.CharField(max_length=200)
