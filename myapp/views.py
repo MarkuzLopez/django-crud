@@ -21,7 +21,24 @@ def create_product(request):
     return render(request, 'products/create_product.html', {'form': form})
 
 def product_list(request):
-    return render(request, 'products/product_list.html')
+    products = Product.objects.all()    
+    # filter conditional
+    # __lt: menor que || __lte: menor o igual || __gt: mayor que || __gte: mayor o igual || __icontains: contiene texto (sin distinguir mayúsculas)    
+    # productFilt = Product.objects.filter(name='Laptop')
+    # # Productos disponibles y con precio menor a 100
+    # productos = Producto.objects.filter(disponible=True, precio__lt=100)
+    # for product in productFilt:
+    #     print(product.name, 'aqui****')
+    # Filter ByID
+    # productById =  Product.objects.get(id=1)
+    # print(productById.name, '***')
+    
+    # order by results asc and desc
+    # productos = Producto.objects.all().order_by('precio')        # Ascendente
+    # productos = Producto.objects.all().order_by('-precio')       # Descendente
+
+    
+    return render(request, 'products/product_list.html',  {'products': products})
 
 class TaskListCreateView(generics.ListCreateAPIView):
     queryset = Task.objects.all()

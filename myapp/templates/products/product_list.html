@@ -8,5 +8,17 @@
 <body>
     <h1>Productos</h1>
     <p>Aquí se mostrará la lista de productos.</p>
+
+    {% if products %}
+        <ul>
+            {%  for product in products  %}
+            <li>{{ product.name}}</li>
+            <li>{{ product.product }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No hay productos disponibles</p>
+        {% endif %}
+
 </body>
 </html>
