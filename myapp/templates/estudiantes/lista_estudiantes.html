@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Estudiantes</title>
+</head>
+<body>
+    <h1>Estudiantes</h1>
+    
+    <ul>
+        {% for estudiante in estudiantes %}
+            <li>
+                {{ estudiante.nombre }} |
+                Cursos:
+                {% for curso in estudiante.cursos.all %}
+                    {{ curso.nombre }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

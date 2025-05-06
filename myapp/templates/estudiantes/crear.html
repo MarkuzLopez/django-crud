@@ -1,0 +1,17 @@
+<!-- # Relaciones entre modelos (OneToMany, ManyToMany) con admin y formularios.
+# paso-5 crear vista html para registrar estudiantes -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nuevo Estudiante</title>
+</head>
+<body>
+    <h1>Agregar Estudiante</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>

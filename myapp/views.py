@@ -4,7 +4,7 @@ from rest_framework import generics
 from .models import Task, User, Product
 
 #IMPORT FORMS
-from .forms import ProductForm
+from .forms import ProductForm, EstudianteForm
 
 from .serializers import TaskSerializer, UserSerializer
 #step 3 for create form with template
@@ -61,4 +61,23 @@ class UserListCreateView(generics.ListCreateAPIView):
 class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+# Relaciones entre modelos (OneToMany, ManyToMany) con admin y formularios.
+# paso-4 crear una vista y template para registrar estudiantes
+
+def crear_estudiante(request):
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST)
+        if form.is_valid():
+            form.save()            
+            return redirect('lista_estudiantes')
+    else: 
+        form = EstudianteForm()
+            
+    return render(request, 'estudiantes/crear.html', {'form': form})
+
+
+def lista_estudiantes(request):
+    estudiantes = Product.objects.all()    
     
+    return render(request, 'estudiantes/lista_estudiantes.html',  {'estudiantes': estudiantes})

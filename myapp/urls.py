@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TaskListCreateView, TaskRetrieveUpdateDeleteView, UserListCreateView, UserRetrieveUpdateDestroyView, create_product, product_list
+from .views import TaskListCreateView, TaskRetrieveUpdateDeleteView, UserListCreateView, UserRetrieveUpdateDestroyView, create_product, product_list, crear_estudiante, lista_estudiantes
 
 urlpatterns = [
     path('tasks/', TaskListCreateView.as_view(), name='task-list-create'),
@@ -12,4 +12,9 @@ urlpatterns = [
     #add route for forms and template
     path('crear/', create_product, name='create_product'),
     path('products/', product_list, name='product_list'),
+    
+    # Relaciones entre modelos (OneToMany, ManyToMany) con admin y formularios.
+    # paso-6 crear URL para la vista
+    path('estudiantes/nuevo', crear_estudiante, name='crear_estudiante'),
+    path('estudiantes/', lista_estudiantes, name='crear_estudiante'),
 ]

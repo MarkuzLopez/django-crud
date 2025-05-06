@@ -51,3 +51,18 @@ class Article(models.Model):
     
     def __str__(self):
         return self.name
+    
+# Relaciones entre modelos (OneToMany, ManyToMany) con admin y formularios.
+# paso1 crear formulario
+class Curso(models.Model):
+    nombre = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.nombre
+    
+class Estudiante(models.Model):
+    nombre = models.CharField(max_length=100)
+    cursos = models.ManyToManyField(Curso, related_name='estudiantes')
+    
+    def __str__(self):
+        return self.nombre
