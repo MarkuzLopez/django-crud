@@ -1,0 +1,13 @@
+<!-- # complementando  para listar, editar, eliminar del modelo de estudiantes -->
+<!DOCTYPE html>
+<html>
+<head><title>Eliminar</title></head>
+<body>
+    <h1>¿Eliminar {{ estudiante.nombre }}?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sí, eliminar</button>
+        <a href="{% url 'lista_estudiantes' %}">Cancelar</a>
+    </form>
+</body>
+</html>

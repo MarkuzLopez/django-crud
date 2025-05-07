@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from rest_framework import generics
-from .models import Task, User, Product
+from .models import Task, User, Product, Estudiante
 
 #IMPORT FORMS
 from .forms import ProductForm, EstudianteForm
@@ -76,8 +76,29 @@ def crear_estudiante(request):
             
     return render(request, 'estudiantes/crear.html', {'form': form})
 
-
+# complementando  para listar, editar, eliminar del modelo de estudiantes
 def lista_estudiantes(request):
-    estudiantes = Product.objects.all()    
-    
+    estudiantes = Estudiante.objects.all()        
     return render(request, 'estudiantes/lista_estudiantes.html',  {'estudiantes': estudiantes})
+
+
+def editar_estudiante(request, estudiante_id):
+    estudiante = get_object_or_404(Estudiante, id=estudiante_id)  # 👈 Esto es correcto
+
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST, instance=estudiante)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_estudiantes')
+    else:
+        form = EstudianteForm(instance=estudiante)
+
+    return render(request, 'estudiantes/crear.html', {'form': form})
+
+
+def eliminar_estudiante(request, estudiante_id):
+    estudiante =  get_object_or_404(Estudiante, id=estudiante_id)
+    if request.method == 'POST':
+        estudiante.delete()
+        return redirect('lista_estudiantes')
+    return render(request, 'estudiantes/confirmar_eliminar.html', {'estudiante' : estudiante})
